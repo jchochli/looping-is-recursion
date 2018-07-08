@@ -58,4 +58,14 @@
         (recur Fn (+ Fn-1 Fn) (dec n)))))
 
 (defn cut-at-repetition [a-seq]
-  "")
+  (loop [new-seq []
+         elements #{}
+         x (first a-seq)
+         xs (rest a-seq)]
+    (cond
+      (elements x) new-seq
+      (empty? xs) (conj new-seq x)
+      :else (recur (conj new-seq x)
+                   (conj elements x)
+                   (first xs)
+                   (rest xs)))))
